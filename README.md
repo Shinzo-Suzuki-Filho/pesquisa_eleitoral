@@ -26,22 +26,38 @@ O **Pesquisa Eleitoral** é um aplicativo móvel moderno desenvolvido para colet
 Para executar este projeto em sua máquina, você precisará do [Node.js](https://nodejs.org/) instalado.
 
 ### 1. Inicializando o Servidor (Backend)
+
 Abra um terminal e execute os seguintes comandos:
+
 ```bash
-cd backend
+cd d:\pesquisa_eleleitoral\backend
 npm install
 node server.js
 ```
-O servidor estará rodando na porta 3000.
+
+O servidor estará rodando na porta 3000. E você verá a mensagem "Conectado ao banco de dados SQLite".
 
 ### 2. Inicializando o Aplicativo Móvel (Frontend)
+
 Em um novo terminal, execute:
+
 ```bash
 cd app
 npm install
 npx expo start
 ```
-*   Use o aplicativo **Expo Go** no seu celular para escanear o QR Code gerado no terminal (ou pressione `a` para rodar em um emulador Android ou `i` para simulador iOS).
+
+- Use o aplicativo **Expo Go** no seu celular para escanear o QR Code gerado no terminal (ou pressione `a` para rodar em um emulador Android ou `i` para simulador iOS).
+
+## 🌍 Colocando em Produção (Acesso Global)
+
+Por padrão, este aplicativo roda em ambiente local (`192.168.x.x`), o que significa que os celulares precisam estar na mesma rede Wi-Fi do computador para enviar e ver votos. 
+
+Para que sua equipe possa usar o app nas ruas via 4G/5G de qualquer lugar do mundo, os seguintes passos são necessários:
+
+1. **Hospedar o Backend:** Suba a pasta `/backend` para um serviço na nuvem (como Render, Heroku ou AWS). Isso gerará uma URL pública (ex: `https://sua-api.render.com`).
+2. **Atualizar o App:** Troque o IP local `192.168.x.x` do arquivo `/app/src/services/socket.js` e das telas (`CollectionScreen`, `ChartScreen`) pela URL pública da sua nuvem.
+3. **Gerar o Aplicativo (APK):** Rode o comando `eas build -p android --profile preview` no terminal do Expo para gerar o instalador oficial `.apk` e instalar nos aparelhos da equipe.
 
 ## ✅ Tarefas Concluídas
 
